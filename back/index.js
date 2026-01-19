@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import User from "./src/models/User.js";
+
 const app = express();
 
 app.use(cors({ origin: "*" })); // Autoriser les requêtes CORS de toutes origines
@@ -8,7 +10,22 @@ app.use(cors({ origin: "*" })); // Autoriser les requêtes CORS de toutes origin
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("Hello, World!");
+  User.findAll().then((users) => {
+    res.json(users);
+  });
+});
+
+app.get("/users/:username", (req, res) => {
+  const { username } = req.params;
+  User.findOne({ where: { username } }).then((user) => {
+    if (user) {
+      res.json(user);
+    } else {
+      User.create({ username: username }).then((newUser) => {
+        res.status(201).json(newUser);
+      });
+    }
+  });
 });
 
 app.listen(PORT, () => {
