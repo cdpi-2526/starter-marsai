@@ -2,7 +2,7 @@
 
 ## Prérequis
 
-- Node.js 24+
+- Node.js 24+ (nvm)
 - Express
 - MySQL 8+
 - React.js avec Vite
