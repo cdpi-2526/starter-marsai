@@ -1,33 +1,16 @@
 import express from "express";
 import cors from "cors";
+import router from "./src/routes/index.js";
 
-import User from "./src/models/User.js";
-
-const app = express();
+const app = express(); // Créer une application Express
 
 app.use(cors({ origin: "*" })); // Autoriser les requêtes CORS de toutes origines
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Définir le port du serveur
 
-app.get("/", (req, res) => {
-  User.findAll().then((users) => {
-    res.json(users);
-  });
-});
+app.use("/", router);
 
-app.get("/users/:username", (req, res) => {
-  const { username } = req.params;
-  User.findOne({ where: { username } }).then((user) => {
-    if (user) {
-      res.json(user);
-    } else {
-      User.create({ username: username }).then((newUser) => {
-        res.status(201).json(newUser);
-      });
-    }
-  });
-});
-
+// Démarrer le serveur
 app.listen(PORT, () => {
   console.log("-----------------------------");
   console.log("--        L'ARBITRE        --");
