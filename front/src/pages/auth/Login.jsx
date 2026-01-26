@@ -21,10 +21,12 @@ export function Login() {
     mutationFn: async (data) => {
       return await login(data);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (response, variables, context) => {
       // If you are logged
-      //
-      window.location.reload();
+      alert(response.data?.message);
+    },
+    onError: (error, variables, context) => {
+      alert(error.response?.data?.error);
     },
   });
 

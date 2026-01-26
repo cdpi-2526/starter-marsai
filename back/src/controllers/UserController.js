@@ -22,11 +22,11 @@ function createUser(req, res) {
 
   User.findOne({ where: { username } }).then((user) => {
     if (user) {
-      res.json(user);
+      res.json({ message: "Utilisateur déjà existant", user });
     } else {
       const hash = password;
       User.create({ username: username, password: hash }).then((newUser) => {
-        res.status(201).json(newUser);
+        res.status(201).json({ message: "Utilisateur créé", newUser });
       });
     }
   });

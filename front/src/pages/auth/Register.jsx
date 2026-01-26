@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import { login } from "../../api/auth.js";
+import { signIn } from "../../api/auth.js";
 import { useMutation } from "@tanstack/react-query";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,12 +19,12 @@ export function Register() {
 
   const registerMutation = useMutation({
     mutationFn: async (data) => {
-      return await login(data);
+      return await signIn(data);
     },
     onSuccess: (data, variables, context) => {
       // If you are logged
       //
-      window.location.reload();
+      alert(data.data?.message);
     },
   });
 
