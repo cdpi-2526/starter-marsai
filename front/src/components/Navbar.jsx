@@ -2,6 +2,14 @@ import { Link } from "react-router";
 import Button from "./Button";
 
 export default function Navbar() {
+  const username = localStorage.getItem("username");
+
+  function handleLogout() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    window.location.reload();
+  }
+
   return (
     <div className="flex justify-between items-center ">
       <div>
@@ -25,7 +33,14 @@ export default function Navbar() {
         </svg>
       </div>
       <div>
-        <Link to="/auth/login">Login</Link>
+        {username ? (
+          <>
+            <span className="mr-4">Hello, {username}</span>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <Link to="/auth/login">Login</Link>
+        )}
       </div>
     </div>
   );

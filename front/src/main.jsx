@@ -11,6 +11,7 @@ import AdminLayout from "./layouts/AdminLayout.jsx";
 import PublicLayout from "./layouts/PublicLayout.jsx";
 import { Login } from "./pages/auth/Login.jsx";
 import { Register } from "./pages/auth/Register.jsx";
+import { RoleGuard } from "./middlewares/RoleGuard.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,7 +34,14 @@ createRoot(document.getElementById("root")).render(
           </Route>
 
           {/* Routes privées */}
-          <Route path="admin" element={<AdminLayout />}>
+          <Route
+            path="admin"
+            element={
+              <RoleGuard allowedRoles={["ADMIN"]}>
+                <AdminLayout />
+              </RoleGuard>
+            }
+          >
             <Route index element={<Dashboard />} />
           </Route>
         </Routes>

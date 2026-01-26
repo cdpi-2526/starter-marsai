@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { login } from "../../api/auth.js";
 import { useMutation } from "@tanstack/react-query";
@@ -13,6 +13,19 @@ const loginSchema = z.object({
 });
 
 export function Login() {
+  if (localStorage.getItem("username")) {
+    return (
+      <>
+        <h1 className="text-2xl">
+          You are already logged in as {localStorage.getItem("username")}
+        </h1>
+        <Link to="/">Go to Home</Link>
+      </>
+    );
+  }
+
+  let navigate = useNavigate();
+
   const { register, handleSubmit } = useForm({
     resolver: zodResolver(loginSchema),
   });
@@ -24,6 +37,9 @@ export function Login() {
     onSuccess: (response, variables, context) => {
       // If you are logged
       alert(response.data?.message);
+      localStorage.setItem("username", response.data?.user?.username);
+      localStorage.setItem("role", response.data?.user?.role);
+      navigate("/");
     },
     onError: (error, variables, context) => {
       alert(error.response?.data?.error);
