@@ -3,11 +3,9 @@
 - Système d'authentification JWT
 - RoleMiddleware back
 - bcrypt
-- Zod
 
+- Zod (optionnel)
+ 
 === Front ===
-
 - React-form et Zod, formulaire de connexion et d'inscription
-- Utilisation de react-query : useQuery et useMutation
 - RoleGuard front
-- Layout
