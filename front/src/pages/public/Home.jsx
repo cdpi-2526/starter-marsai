@@ -1,6 +1,7 @@
 import Button from "../../components/Button";
 import "./Home.css";
 import Users from "./Users.jsx";
+import Videos from "./Videos.jsx";
 
 function Home() {
   return (
@@ -32,6 +33,8 @@ function Home() {
       </div>
 
       <Users />
+
+      <Videos />
     </>
   );
 }

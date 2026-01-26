@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUsers } from "../../api/users.js";
+import { getVideos } from "../../api/videos.js";
 
 function Videos() {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["listVideos"],
-    queryFn: getUsers,
+    queryFn: getVideos,
   });
 
   if (isPending) {
