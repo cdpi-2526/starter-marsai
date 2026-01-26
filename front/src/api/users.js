@@ -5,4 +5,25 @@ async function getUsers() {
   // http://localhost:3000/users; fetch method GET
 }
 
-export { getUsers };
+async function createUser(newUser) {
+  return await instance.post("users", newUser);
+  // http://localhost:3000/users; fetch method POST
+}
+
+
+async function updateUser(id, updatedUser) {
+  return await instance.put(`users/${id}`, updatedUser);
+  // http://localhost:3000/users/1; fetch method PUT
+}
+
+async function deleteUser(id) {
+  return await instance.delete(`users/${id}`);
+  // http://localhost:3000/users/1; fetch method DELETE
+}
+
+async function getUserById(id) {
+  return await instance.get(`users/${id}`);
+  // http://localhost:3000/users/1; fetch method GET
+}
+
+export { getUsers, createUser, updateUser, deleteUser, getUserById };

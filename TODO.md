@@ -7,12 +7,7 @@
 
 === Front ===
 
-- Initialiser Axios
 - React-form et Zod, formulaire de connexion et d'inscription
-- Utilisation de react-query
+- Utilisation de react-query : useQuery et useMutation
 - RoleGuard front
 - Layout
-
-=== Fullstack ===
-
-- CRUD Users
