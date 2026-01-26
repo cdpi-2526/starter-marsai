@@ -6,7 +6,7 @@ const userRouter = express.Router();
 
 // Admin
 
-userRouter.use(AuthMiddleware);
+userRouter.use((req, res, next) => AuthMiddleware(req, res, next, ["ADMIN"]));
 
 userRouter.get("/", UserController.getUsers); // Liste de tous les utilisateurs
 userRouter.get("/:id", UserController.getUserById); // Récupérer un utilisateur par ID
