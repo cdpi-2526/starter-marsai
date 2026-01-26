@@ -5,3 +5,4 @@ async function getUsers() {
   // http://localhost:3000/users; fetch method GET
 }
 
+export { getUsers };
