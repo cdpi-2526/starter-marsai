@@ -76,4 +76,15 @@ function getUserById(req, res) {
   });
 }
 
-export default { getUsers, createUser, deleteUser, updateUser, getUserById };
+function findUserByUsername(username) {
+  return User.findOne({ where: { username } });
+}
+
+export default {
+  getUsers,
+  createUser,
+  deleteUser,
+  updateUser,
+  getUserById,
+  findUserByUsername,
+};

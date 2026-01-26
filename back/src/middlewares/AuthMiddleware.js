@@ -1,0 +1,42 @@
+// middlewares/AuthMiddleware.js
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+
+export default async function AuthMiddleware(req, res, next) {
+  const authHeader = req.header("Authorization");
+  const [prefix, token] = authHeader?.split(" ") || [null, undefined];
+
+  if (prefix !== "Bearer") {
+    return res.status(401).json({ error: "No Bearer token" });
+  }
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ error: "You must be authenticated to access this resource" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decoded?.username) {
+      return res.status(401).json({ error: "Invalid Payload" });
+    }
+
+    const user = await User.findOne({
+      where: { username: decoded.username },
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        error:
+          "Permission denied, you are not authorized to access this resource",
+      });
+    }
+
+    req.user = user;
+    return next();
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+}

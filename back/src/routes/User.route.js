@@ -1,9 +1,12 @@
 import express from "express";
 import UserController from "../controllers/UserController.js";
+import AuthMiddleware from "../middlewares/AuthMiddleware.js";
 
 const userRouter = express.Router();
 
 // Admin
+
+userRouter.use(AuthMiddleware);
 
 userRouter.get("/", UserController.getUsers); // Liste de tous les utilisateurs
 userRouter.get("/:id", UserController.getUserById); // Récupérer un utilisateur par ID
