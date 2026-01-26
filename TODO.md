@@ -3,6 +3,7 @@
 - Système d'authentification JWT
 - RoleMiddleware back
 - bcrypt
+- Zod
 
 === Front ===
 

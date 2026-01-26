@@ -1,13 +1,15 @@
 import User from "../models/User.js";
-
+// Liste
 function getUsers(req, res) {
   User.findAll().then((users) => {
     res.json(users);
   });
 }
 
+// Création
 function createUser(req, res) {
-  const { username, password } = req.params;
+  console.log(req);
+  const { username, password } = req.body;
 
   if (!username || !password) {
     return res.status(400).json({ error: "Tous les champs sont requis" });
@@ -17,19 +19,51 @@ function createUser(req, res) {
     if (user) {
       res.json(user);
     } else {
-      User.create({ username: username, password: password }).then(
-        (newUser) => {
-          res.status(201).json(newUser);
-        },
-      );
+      const hash = password;
+      User.create({ username: username, password: hash }).then((newUser) => {
+        res.status(201).json(newUser);
+      });
     }
   });
 }
 
-function deleteUser() {}
-function updateUser() {}
+// Suppression
+function deleteUser(req, res) {
+  const { id } = req.params;
+  User.destroy({ where: { id } }).then(() => {
+    res.status(204).json({ message: "Utilisateur supprimé" });
+  });
+}
 
-function getUserById() {}
-function getUserByEmail() {}
+// Modification
+function updateUser(req, res) {
+  const { id } = req.params;
+  const { username, password } = req.body;
 
-export default { getUsers, createUser };
+  User.findOne({ where: { id } }).then((user) => {
+    if (user) {
+      user.username = username || user.username;
+      user.password = password || user.password;
+
+      user.save().then((updatedUser) => {
+        res.json(updatedUser);
+      });
+    } else {
+      res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+  });
+}
+
+// Récupérer un utilisateur par ID
+function getUserById(req, res) {
+  const { id } = req.params;
+  User.findOne({ where: { id } }).then((user) => {
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+  });
+}
+
+export default { getUsers, createUser, deleteUser, updateUser, getUserById };

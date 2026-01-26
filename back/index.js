@@ -5,6 +5,7 @@ import router from "./src/routes/index.js";
 const app = express(); // Créer une application Express
 
 app.use(cors({ origin: "*" })); // Autoriser les requêtes CORS de toutes origines
+app.use(express.json());
 
 const PORT = process.env.PORT || 3000; // Définir le port du serveur
 
