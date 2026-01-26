@@ -1,4 +1,6 @@
 import User from "../models/User.js";
+import { hashPassword } from "../utils/password.js";
+
 // Liste
 function getUsers(req, res) {
   User.findAll().then((users) => {
@@ -20,11 +22,11 @@ function createUser(req, res) {
     return res.status(400).json({ error: "Tous les champs sont requis" });
   }
 
-  User.findOne({ where: { username } }).then((user) => {
+  User.findOne({ where: { username } }).then(async (user) => {
     if (user) {
       res.json({ message: "Utilisateur déjà existant", user });
     } else {
-      const hash = password;
+      const hash = await hashPassword(password);
       User.create({ username: username, password: hash }).then((newUser) => {
         res.status(201).json({ message: "Utilisateur créé", newUser });
       });
