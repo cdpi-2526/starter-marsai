@@ -1,6 +1,10 @@
 import express from "express";
-// Importer le modèle Vidéo
+import VideoController from "../controllers/VideoController.js";
+
 const videoRouter = express.Router();
+
+videoRouter.get("/", VideoController.getVideos);
+videoRouter.post("/", VideoController.createVideo);
 
 videoRouter.post("/upload", (req, res) => {
   // Code à faire
