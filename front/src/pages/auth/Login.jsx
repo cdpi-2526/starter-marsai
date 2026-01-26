@@ -40,6 +40,7 @@ export function Login() {
       localStorage.setItem("username", response.data?.user?.username);
       localStorage.setItem("role", response.data?.user?.role);
       navigate("/");
+      window.location.reload();
     },
     onError: (error, variables, context) => {
       alert(error.response?.data?.error);

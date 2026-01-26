@@ -4,7 +4,3 @@
 - RoleMiddleware back
 
 - Zod (optionnel)
-
-=== Front ===
-
-- RoleGuard front
