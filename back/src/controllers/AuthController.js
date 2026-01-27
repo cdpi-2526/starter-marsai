@@ -16,14 +16,14 @@ function login(req, res) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
-      const jwtToken = jwt.sign({ username }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ username }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN || "1h",
       });
 
       // Bearer token uniquement
       return res.status(200).json({
         message: "Login successful",
-        jwtToken,
+        token,
       });
     });
   });
