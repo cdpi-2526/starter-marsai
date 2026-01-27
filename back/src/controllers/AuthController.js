@@ -17,7 +17,7 @@ function login(req, res) {
       }
 
       const jwtToken = jwt.sign({ username }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
+        expiresIn: process.env.JWT_EXPIRES_IN || "1h",
       });
 
       // Bearer token uniquement
