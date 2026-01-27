@@ -6,21 +6,24 @@ import jwt from "jsonwebtoken";
 function login(req, res) {
   const { username, password } = req.body;
 
+  // Sequelize
   User.findOne({ where: { username } }).then((user) => {
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
+    // Functions utilisateurs
     comparePassword(password, user.password).then((isMatch) => {
       if (!isMatch) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
+      // jwt librairie
       const token = jwt.sign({ username }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN || "1h",
       });
 
-      // Bearer token uniquement
+      // Express response
       return res.status(200).json({
         message: "Login successful",
         username: user.username,
