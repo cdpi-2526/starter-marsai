@@ -39,8 +39,18 @@ export function Login() {
       localStorage.setItem("username", response.data?.username);
       localStorage.setItem("role", response.data?.role);
       localStorage.setItem("token", response.data?.token);
-      navigate("/");
-      window.location.reload();
+
+      switch (response.data?.role) {
+        case "ADMIN":
+          navigate("/admin");
+          break;
+        case "JURY":
+          navigate("/");
+          break;
+        default:
+          navigate("/");
+          break;
+      }
     },
     onError: (error, variables, context) => {
       alert(error.response?.data?.error);
