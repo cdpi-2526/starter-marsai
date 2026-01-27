@@ -7,6 +7,7 @@ export default function Navbar() {
   function handleLogout() {
     localStorage.removeItem("username");
     localStorage.removeItem("role");
+    localStorage.removeItem("token");
     window.location.reload();
   }
 
