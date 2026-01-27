@@ -23,6 +23,8 @@ function login(req, res) {
       // Bearer token uniquement
       return res.status(200).json({
         message: "Login successful",
+        username: user.username,
+        role: user.role,
         token,
       });
     });

@@ -36,9 +36,9 @@ export function Login() {
     },
     onSuccess: (response, variables, context) => {
       // If you are logged
-      alert(response.data?.message);
-      localStorage.setItem("username", response.data?.user?.username);
-      localStorage.setItem("role", response.data?.user?.role);
+      localStorage.setItem("username", response.data?.username);
+      localStorage.setItem("role", response.data?.role);
+      localStorage.setItem("token", response.data?.token);
       navigate("/");
       window.location.reload();
     },
