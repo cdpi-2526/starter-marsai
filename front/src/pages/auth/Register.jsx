@@ -10,6 +10,7 @@ import * as z from "zod";
 const registerSchema = z.object({
   username: z.string(),
   password: z.string(),
+  role: z.string().optional().default("PRODUCER"),
 });
 
 export function Register() {
@@ -39,6 +40,9 @@ export function Register() {
       //
       alert(data.data?.message);
       navigate("/auth/login");
+    },
+    onError: (error, variables, context) => {
+      console.error("Error during registration:", error);
     },
   });
 

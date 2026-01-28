@@ -16,9 +16,9 @@ app.use("/", router);
 
 // Démarrer le serveur
 app.listen(PORT, () => {
-  console.log("-----------------------------");
-  console.log("--        L'ARBITRE        --");
-  console.log("-----------------------------");
+  console.log(" ----------------------------");
+  console.log("|        L'ARBITRE           |");
+  console.log(" ----------------------------");
 
   console.log(`Le serveur est lancé sur http://localhost:${PORT}`);
 });
