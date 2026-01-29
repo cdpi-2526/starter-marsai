@@ -14,7 +14,7 @@ function createUser(req, res) {
     return res.status(400).json({ error: "Données manquantes" });
   }
 
-  const { username, password, role } = req.body;
+  const { username, password, role = "PRODUCER" } = req.body;
 
   if (!username || !password || !role) {
     return res.status(400).json({ error: "Tous les champs sont requis" });
