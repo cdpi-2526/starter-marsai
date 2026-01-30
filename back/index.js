@@ -1,24 +1,26 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import router from "./src/routes/index.js";
-import { configDotenv } from "dotenv";
 
-configDotenv(); // Charger les variables d'environnement depuis le fichier .env
+dotenv.config();
 
-const app = express(); // Créer une application Express
-
-app.use(cors({ origin: "*" })); // Autoriser les requêtes CORS de toutes origines
+const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3000; // Définir le port du serveur
+const PORT = process.env.PORT || 3000;
 
-app.use("/", router);
+app.get("/health", (req, res) => {
+  res.json({ ok: true });
+});
 
-// Démarrer le serveur
+app.use(router);
+
 app.listen(PORT, () => {
   console.log(" ----------------------------");
   console.log("|        L'ARBITRE           |");
   console.log(" ----------------------------");
-
   console.log(`Le serveur est lancé sur http://localhost:${PORT}`);
 });
