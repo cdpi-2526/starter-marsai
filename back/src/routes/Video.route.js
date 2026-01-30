@@ -11,4 +11,6 @@ videoRouter.post("/upload", (req, res) => {
   res.send("Upload de vidéo");
 }); // User
 
+videoRouter.get("/duration/:id", VideoController.getVideoDuration); // User
+
 export default videoRouter;

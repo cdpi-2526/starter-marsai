@@ -12,6 +12,7 @@ import PublicLayout from "./layouts/PublicLayout.jsx";
 import { Login } from "./pages/auth/Login.jsx";
 import { Register } from "./pages/auth/Register.jsx";
 import { RoleGuard } from "./middlewares/RoleGuard.jsx";
+import Upload from "./pages/auth/Upload.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,15 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
+
+            <Route
+              path="/upload"
+              element={
+                <RoleGuard allowedRoles={["PRODUCER"]}>
+                  <Upload />
+                </RoleGuard>
+              }
+            />
           </Route>
 
           {/* Routes privées */}
@@ -38,6 +48,18 @@ createRoot(document.getElementById("root")).render(
             path="admin"
             element={
               <RoleGuard allowedRoles={["ADMIN"]}>
+                <AdminLayout />
+              </RoleGuard>
+            }
+          >
+            <Route index element={<Dashboard />} />
+          </Route>
+
+          {/* Routes réalisateurs */}
+          <Route
+            path="admin"
+            element={
+              <RoleGuard allowedRoles={["PRODUCER"]}>
                 <AdminLayout />
               </RoleGuard>
             }

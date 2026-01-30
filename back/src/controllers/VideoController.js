@@ -1,4 +1,5 @@
 import Video from "../models/Video.js";
+import { videoDuration } from "@numairawan/video-duration";
 
 // Liste
 function getVideos(req, res) {
@@ -32,4 +33,22 @@ function createVideo(req, res) {
   });
 }
 
-export default { getVideos, createVideo };
+function getVideoDuration(req, res) {
+  const videoId = req.params.id;
+
+  // Using a local video file (Node.js)
+  const localVideoPath = `uploads/${videoId}.mp4`;
+
+  console.log(`Getting duration for video at path: ${localVideoPath}`);
+  videoDuration(localVideoPath)
+    .then((duration) => {
+      res.json({ duration: duration });
+    })
+    .catch((error) => {
+      res
+        .status(500)
+        .json({ error: "Erreur lors de la récupération de la durée" });
+    });
+}
+
+export default { getVideos, createVideo, getVideoDuration };
