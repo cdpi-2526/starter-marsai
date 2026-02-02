@@ -39,4 +39,26 @@ function register(req, res) {
   // Envoi d'email
 }
 
-export default { login, register };
+async function checkToken(req, res) {
+  const { token } = req.body;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  if (!decoded?.username) {
+    return res.status(401).json({ error: "Invalid Payload" });
+  }
+
+  const user = await User.findOne({
+    where: { username: decoded.username },
+  });
+  if (!user) {
+    return res.status(401).json({ error: "Invalid Token" });
+  }
+
+  return res.status(200).json({
+    message: "Token is valid",
+    username: user.username,
+    role: user.role,
+  });
+}
+
+export default { login, register, checkToken };
