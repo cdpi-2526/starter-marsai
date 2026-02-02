@@ -8,4 +8,8 @@ async function signIn(data) {
   return await instance.post("auth/register", data);
 }
 
-export { login, signIn };
+async function checkToken(data) {
+  return await instance.post("auth/checkToken", data);
+}
+
+export { login, signIn, checkToken };
