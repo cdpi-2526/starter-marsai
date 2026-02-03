@@ -6,7 +6,7 @@ const userRouter = express.Router();
 
 // Admin
 
-userRouter.use((req, res, next) => AuthMiddleware(req, res, next, ["ADMIN"]));
+userRouter.use(AuthMiddleware(["ADMIN"]));
 
 userRouter.get("/", UserController.getUsers); // Liste de tous les utilisateurs
 userRouter.get("/:id", UserController.getUserById); // Récupérer un utilisateur par ID
@@ -14,7 +14,7 @@ userRouter.post("/", UserController.createUser); // Créer un nouvel utilisateur
 userRouter.delete("/:id", UserController.deleteUser); // Supprimer un utilisateur par ID
 userRouter.put(
   "/:id",
-  // (req, res, next) => AuthMiddleware(req, res, next, ["PRODUCER"]),
+  // AuthMiddleware(["PRODUCER"]),
   UserController.updateUser,
 ); // Modifier un utilisateur par ID
 
