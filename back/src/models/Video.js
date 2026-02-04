@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/connection.js";
+import User from "./User.js";
 
 const Video = sequelize.define("Video", {
   title: {

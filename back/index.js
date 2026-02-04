@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import router from "./src/routes/index.js";
+import sequelize from "./src/db/connection.js";
 
 dotenv.config();
 
@@ -23,4 +24,8 @@ app.listen(PORT, () => {
   console.log("|        L'ARBITRE           |");
   console.log(" ----------------------------");
   console.log(`Le serveur est lancé sur http://localhost:${PORT}`);
+});
+
+sequelize.sync({ force: true }).then(() => {
+  console.log("La base de données est synchronisée.");
 });

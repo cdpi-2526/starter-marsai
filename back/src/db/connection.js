@@ -6,8 +6,4 @@ const sequelize = new Sequelize("marsai", "root", "rootroot", {
   dialect: "mysql",
 });
 
-sequelize.sync().then(() => {
-  console.log("La base de données est synchronisée.");
-});
-
 export default sequelize;

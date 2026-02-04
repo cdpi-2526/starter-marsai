@@ -1,4 +1,4 @@
-import Video from "../models/Video.js";
+import Video from "../models/index.js";
 import { videoDuration } from "@numairawan/video-duration";
 
 // Liste
