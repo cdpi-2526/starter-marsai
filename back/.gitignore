@@ -4,4 +4,4 @@ uploads
 
 youtube_tokens.json
 
-config/config.json
+src/config/config.json
