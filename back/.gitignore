@@ -3,5 +3,3 @@ node_modules
 uploads
 
 youtube_tokens.json
-
-src/config/config.json
