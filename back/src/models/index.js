@@ -6,7 +6,9 @@ import Category from "./Category.js";
 import VideoCategory from "./VideoCategory.js";
 import Award from "./Award.js";
 
-// Associations
+/**
+ * Associations
+ * */
 User.hasMany(Video, { foreignKey: "userId", as: "videos" });
 Video.belongsTo(User, { foreignKey: "userId", as: "user" });
 Vote.belongsTo(User, { foreignKey: "userId", as: "user" });
