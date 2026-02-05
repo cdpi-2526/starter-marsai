@@ -65,6 +65,8 @@ function updateUser(req, res) {
 // Récupérer un utilisateur par ID
 function getUserById(req, res) {
   const { id } = req.params;
+
+  
   User.findOne({ where: { id } }).then((user) => {
     if (user) {
       res.json(user);

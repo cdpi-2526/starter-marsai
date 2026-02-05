@@ -5,7 +5,6 @@ import router from "./src/routes/index.js";
 import sequelize from "./src/db/connection.js";
 
 dotenv.config();
-
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
