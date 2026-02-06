@@ -1,5 +1,4 @@
-import Model from "../models/index.js";
-const { Award, Video } = Model;
+import { Award, Video } from "../models/index.js";
 function assignAward(req, res) {
   const { awardId, movieId } = req.params;
 

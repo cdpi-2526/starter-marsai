@@ -32,4 +32,4 @@ Category.belongsToMany(Video, {
 Video.hasMany(Award, { foreignKey: "videoId", as: "awards" });
 Award.belongsTo(Video, { foreignKey: "videoId", as: "video" });
 
-export default { User, Video, Setting, Vote, Category, VideoCategory, Award };
+export { User, Video, Setting, Vote, Category, VideoCategory, Award };

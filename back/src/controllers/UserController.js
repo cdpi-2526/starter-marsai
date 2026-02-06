@@ -1,4 +1,4 @@
-import User from "../models/index.js";
+import { User } from "../models/index.js";
 import { hashPassword } from "../utils/password.js";
 
 // Liste
@@ -66,7 +66,6 @@ function updateUser(req, res) {
 function getUserById(req, res) {
   const { id } = req.params;
 
-  
   User.findOne({ where: { id } }).then((user) => {
     if (user) {
       res.json(user);
