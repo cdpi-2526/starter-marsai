@@ -1,7 +1,19 @@
 import { Link } from "react-router";
 import Button from "./Button";
+import { useEffect, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ t }) {
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en",
+  );
+
+  function changeLanguage() {
+    const newLanguage = language === "en" ? "fr" : "en";
+    localStorage.setItem("language", newLanguage);
+    setLanguage(newLanguage);
+    window.location.reload();
+  }
+
   const username = localStorage.getItem("username");
 
   function handleLogout() {
@@ -33,11 +45,14 @@ export default function Navbar() {
           ></path>
         </svg>
       </div>
-      <div>
+      <div className="flex gap-2">
         {username ? (
           <>
             <span className="mr-4">Hello, {username}</span>
             <button onClick={handleLogout}>Logout</button>
+            <span className="ml-4" onClick={changeLanguage}>
+              {language === "en" ? "FR" : "EN"}
+            </span>
           </>
         ) : (
           <Link to="/auth/login">Login</Link>

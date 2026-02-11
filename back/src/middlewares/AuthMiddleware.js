@@ -34,7 +34,6 @@ export default function AuthMiddleware(roles = []) {
         });
       }
 
-      req.user = user;
       return next();
     } catch (error) {
       return res.status(401).json({ error: error.message });

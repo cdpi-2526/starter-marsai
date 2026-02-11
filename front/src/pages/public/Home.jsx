@@ -1,13 +1,10 @@
 import Button from "../../components/Button";
 import "./Home.css";
+import { useOutletContext } from "react-router";
 
 function Home() {
-  return (
-    <>
-
-      Bienvenue !
-    </>
-  );
+  const { t } = useOutletContext();
+  return <>{t("title")}</>;
 }
 
 export default Home;
