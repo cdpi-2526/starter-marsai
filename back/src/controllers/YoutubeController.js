@@ -117,7 +117,7 @@ async function uploadVideo(req, res) {
 
     res.json({
       videoId: response?.data?.id,
-      licence: response?.data.contentDetails.licensedContent,
+      licence: response?.data.contentDetails,
     });
   } catch (e) {
     const details = {
