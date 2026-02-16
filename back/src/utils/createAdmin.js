@@ -1,4 +1,4 @@
-import User from "../models";
+import { User } from "../models";
 import { hashPassword } from "./password.js";
 
 const hash = await hashPassword("admin2");

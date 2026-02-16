@@ -59,7 +59,7 @@ createRoot(document.getElementById("root")).render(
           <Route
             path="admin"
             element={
-              <RoleGuard allowedRoles={["PRODUCER"]}>
+              <RoleGuard allowedRoles={["ADMIN"]}>
                 <AdminLayout />
               </RoleGuard>
             }

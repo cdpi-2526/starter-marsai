@@ -9,19 +9,18 @@ export function RoleGuard({ allowedRoles, children }) {
 
   // API Call /checkToken
   useEffect(() => {
-    fetch(instance + "/auth/checkToken", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: token }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
+    instance
+      .post("/auth/checkToken", { token: token })
+      .then((response) => {
+        console.log("Token is valid:", response.data);
+        setUser(response.data);
       })
       .catch((error) => {
         console.error("Error checking token:", error);
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        setUser(null);
+        window.location.href = "/";
       });
   }, [token]);
 

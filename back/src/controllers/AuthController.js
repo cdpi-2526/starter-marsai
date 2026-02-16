@@ -40,7 +40,13 @@ function register(req, res) {
 
 async function checkToken(req, res) {
   const { token } = req.body;
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return res.status(401).json({ error: "Token expired" });
+  }
 
   if (!decoded?.username) {
     return res.status(401).json({ error: "Invalid Payload" });

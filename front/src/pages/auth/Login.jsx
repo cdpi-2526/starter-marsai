@@ -37,7 +37,6 @@ export function Login() {
     onSuccess: (response, variables, context) => {
       // If you are logged
       localStorage.setItem("username", response.data?.username);
-      localStorage.setItem("role", response.data?.role);
       localStorage.setItem("token", response.data?.token);
 
       switch (response.data?.role) {
