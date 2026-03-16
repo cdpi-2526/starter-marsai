@@ -35,6 +35,7 @@ export default function AuthMiddleware(roles = []) {
       }
 
       req.userId = user.id;
+      req.email = user.email;
 
       return next();
     } catch (error) {
